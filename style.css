@@ -1,0 +1,62 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-image: url("https://wonderfulengineering.com/wp-content/uploads/2014/06/multiple-choice-exam.jpg"); 
+        background-size: cover; /* Ensures the image covers the whole background */
+        background-position: center center; /* Center the image */
+        background-attachment: fixed; /* Makes the background image fixed when scrolling */
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+}
+
+.login-container {
+    background-color: rgb(206, 225, 225);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+/* Styling the signup container */
+.signup-container {
+    margin-top: 20px;
+}
+
+/* Styling the sign up button */
+#signup-button {
+    background-color: #008CBA;
+}
+
+#signup-button:hover {
+    background-color: #007bb5;
+}
