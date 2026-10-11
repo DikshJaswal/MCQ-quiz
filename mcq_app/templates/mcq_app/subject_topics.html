@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}{{ subject.name }}{% endblock %}
+
+{% block content %}
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="{% url 'mcq_app:home' %}#semesters">Semesters</a></li>
+      <li><a href="{% url 'mcq_app:semester_subjects' semester.id %}">Semester {{ semester.number }}</a></li>
+      <li aria-current="page">{{ subject.name }}</li>
+    </ol>
+  </nav>
+
+  <div class="page-head">
+    <h1>{{ subject.name }} - Topics</h1>
+    <p>Choose a topic to start a quiz.</p>
+  </div>
+
+  <div class="semester-grid">
+    {% for topic in topics %}
+      <a class="semester-card" href="{% url 'mcq_app:quiz_intro' topic.id %}">
+        <h3>{{ topic.name }}</h3>
+        <p>{{ topic.description }}</p>
+      </a>
+    {% empty %}
+      <p class="empty">No topics have been added to this subject yet.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

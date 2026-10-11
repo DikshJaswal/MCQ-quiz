@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Semester {{ semester.number }}{% endblock %}
+
+{% block content %}
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="{% url 'mcq_app:home' %}#semesters">Semesters</a></li>
+      <li aria-current="page">Semester {{ semester.number }}</li>
+    </ol>
+  </nav>
+
+  <div class="page-head">
+    <h1>Semester {{ semester.number }} Subjects</h1>
+    <p>Choose a subject to see its topics.</p>
+  </div>
+
+  <div class="semester-grid">
+    {% for subject in subjects %}
+      <a class="semester-card" href="{% url 'mcq_app:subject_topics' semester.id subject.id %}">
+        <h3>{{ subject.name }}</h3>
+        <p>{% for topic in subject.topics.all %}{{ topic.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+      </a>
+    {% empty %}
+      <p class="empty">No subjects have been added to this semester yet.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+# Secrets and local data: never commit these
+.env
+.env.*
+!.env.example
+*.sqlite3
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+*_venv/
+
+# Build output
+staticfiles/
+
+# Editors / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

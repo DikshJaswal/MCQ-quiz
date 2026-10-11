@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Log in{% endblock %}
+
+{% block content %}
+<section class="auth">
+  <h1>Log in</h1>
+
+  {% if throttled %}
+    <p class="notice notice-error" role="alert">Too many failed attempts. Please wait a few minutes before trying again, or <a href="{% url 'password_reset' %}">reset your password</a>.</p>
+  {% endif %}
+  {% if form.non_field_errors %}
+    {% for error in form.non_field_errors %}<p class="notice notice-error" role="alert">{{ error }}</p>{% endfor %}
+  {% endif %}
+
+  <form method="post" novalidate>
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ next }}">
+    {% for field in form %}{% include "includes/field.html" with field=field %}{% endfor %}
+    <button type="submit" class="btn">Log in</button>
+  </form>
+
+  <div class="form-foot">
+    <p><a href="{% url 'password_reset' %}">Forgot your password?</a></p>
+    <p>New here? <a href="{% url 'signup' %}">Create an account</a></p>
+  </div>
+</section>
+{% endblock %}

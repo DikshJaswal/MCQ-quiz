@@ -1,0 +1,51 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Home{% endblock %} | CSE MCQ Portal</title>
+  <link rel="icon" type="image/svg+xml" href="{% static 'img/favicon.svg' %}">
+  <link rel="stylesheet" href="{% static 'css/site.css' %}">
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Navbar: the same on every page -->
+  {% url 'mcq_app:home' as home_url %}
+  {% url 'profile' as profile_url %}
+  <nav class="navbar" aria-label="Main">
+    <a class="logo" href="{{ home_url }}">CSE MCQ Portal</a>
+    <div class="nav-links">
+      <a href="{{ home_url }}"{% if request.path == home_url %} class="active" aria-current="page"{% endif %}>Home</a>
+      <a href="{{ profile_url }}"{% if request.path == profile_url %} class="active" aria-current="page"{% endif %}>Profile</a>
+      {% if user.is_authenticated %}
+        <form class="logout-form" method="post" action="{% url 'logout' %}">
+          {% csrf_token %}
+          <button type="submit" class="login-btn">Logout</button>
+        </form>
+      {% else %}
+        <a href="{% url 'login' %}" class="login-btn">Login</a>
+      {% endif %}
+    </div>
+  </nav>
+
+  {% if messages %}
+  <div class="container messages">
+    {% for message in messages %}
+      <p class="notice notice-{{ message.tags }}" role="{% if message.level >= 40 %}alert{% else %}status{% endif %}">{{ message }}</p>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <main id="main" class="{% block main_class %}page{% endblock %}">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>
+    <p>&copy; {% now "Y" %} CSE MCQ Portal. All Rights Reserved.</p>
+  </footer>
+
+  <script src="{% static 'js/app.js' %}" defer></script>
+</body>
+</html>

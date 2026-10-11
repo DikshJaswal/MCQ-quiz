@@ -1,0 +1,138 @@
+{
+    "1": {
+        "Mathematics-I": [
+            ["Differential Calculus", "Limits, derivatives, and applications"],
+            ["Integral Calculus", "Integration techniques and applications"],
+            ["Linear Algebra", "Vectors, matrices, and linear transformations"]
+        ],
+        "Physics": [
+            ["Newtonian Mechanics", "Laws of motion and gravitation"],
+            ["Thermodynamics", "Heat, work, and energy"],
+            ["Waves and Optics", "Wave motion and light phenomena"]
+        ],
+        "Programming Fundamentals": [
+            ["C Basics", "Variables, operators, and control flow"],
+            ["Functions", "Modular programming in C"],
+            ["Arrays and Pointers", "Data structures in C"]
+        ]
+    },
+    "2": {
+        "Mathematics-II": [
+            ["Multivariable Calculus", "Partial derivatives and multiple integrals"],
+            ["Complex Numbers", "Algebra and geometry of complex numbers"],
+            ["Differential Equations", "Ordinary differential equations"]
+        ],
+        "Chemistry": [
+            ["Atomic Structure", "Fundamentals of atomic theory"],
+            ["Chemical Bonding", "Molecular structure and properties"],
+            ["Chemical Thermodynamics", "Energy changes in reactions"]
+        ],
+        "Object Oriented Programming": [
+            ["OOP Concepts", "Classes, objects, and inheritance"],
+            ["C++ Basics", "Syntax and features of C++"],
+            ["STL", "Standard Template Library"]
+        ]
+    },
+    "3": {
+        "Data Structures": [
+            ["Arrays and Linked Lists", "Basic data structures"],
+            ["Stacks and Queues", "LIFO and FIFO structures"],
+            ["Trees and Graphs", "Hierarchical and network data structures"]
+        ],
+        "Digital Electronics": [
+            ["Logic Gates", "Basic logic operations"],
+            ["Flip-Flops and Registers", "Sequential circuits"],
+            ["Counters and Memory", "Digital storage components"]
+        ],
+        "Computer Organization": [
+            ["Processor Architecture", "CPU design and instruction sets"],
+            ["Memory Hierarchy", "Cache, RAM, and storage"],
+            ["I/O Systems", "Peripherals and interfacing"]
+        ]
+    },
+    "4": {
+        "Operating Systems": [
+            ["Process Management", "Threads, scheduling, and synchronization"],
+            ["Memory Management", "Paging and segmentation"],
+            ["File Systems", "Storage organization"]
+        ],
+        "Database Management Systems": [
+            ["SQL Basics", "Queries and transactions"],
+            ["Normalization", "Database optimization"],
+            ["Indexing and Hashing", "Efficient data retrieval"]
+        ],
+        "Computer Networks": [
+            ["Network Models", "OSI and TCP/IP architecture"],
+            ["Routing Protocols", "Pathfinding in networks"],
+            ["Network Security", "Cryptography and firewalls"]
+        ]
+    },
+    "5": {
+        "Software Engineering": [
+            ["Software Development Life Cycle", "Phases and models"],
+            ["Agile Methodology", "Scrum and Kanban"],
+            ["Testing Strategies", "Unit and integration testing"]
+        ],
+        "Theory of Computation": [
+            ["Finite Automata", "Deterministic and non-deterministic automata"],
+            ["Turing Machines", "Computability theory"],
+            ["Complexity Classes", "P, NP, and NP-complete"]
+        ],
+        "Microprocessors": [
+            ["8085 and 8086", "Architecture and instruction sets"],
+            ["Assembly Language Programming", "Low-level programming"],
+            ["Interfacing Techniques", "Peripheral communication"]
+        ]
+    },
+    "6": {
+        "Artificial Intelligence": [
+            ["Search Algorithms", "BFS, DFS, and A*"] ,
+            ["Machine Learning Basics", "Supervised and unsupervised learning"],
+            ["Neural Networks", "Deep learning models"]
+        ],
+        "Cybersecurity": [
+            ["Encryption Techniques", "AES, RSA, and hashing"],
+            ["Threat Analysis", "Types of cyber threats"],
+            ["Security Policies", "Access control and authentication"]
+        ],
+        "Cloud Computing": [
+            ["Cloud Architecture", "IaaS, PaaS, and SaaS"],
+            ["Virtualization", "Hypervisors and containers"],
+            ["Cloud Security", "Data protection and compliance"]
+        ]
+    },
+    "7": {
+        "Big Data": [
+            ["Hadoop Ecosystem", "HDFS and MapReduce"],
+            ["Data Analytics", "Processing large datasets"],
+            ["Data Visualization", "Tools and techniques"]
+        ],
+        "Blockchain Technology": [
+            ["Cryptography in Blockchain", "Consensus algorithms"],
+            ["Smart Contracts", "Ethereum and Solidity"],
+            ["Decentralized Applications", "DApps and Web3"]
+        ],
+        "Internet of Things": [
+            ["IoT Architecture", "Sensors, devices, and networks"],
+            ["Edge Computing", "Processing data closer to the source"],
+            ["IoT Security", "Threats and mitigation strategies"]
+        ]
+    },
+    "8": {
+        "Quantum Computing": [
+            ["Quantum Bits", "Qubits and superposition"],
+            ["Quantum Algorithms", "Shor’s and Grover’s algorithms"],
+            ["Quantum Cryptography", "Quantum key distribution"]
+        ],
+        "Human-Computer Interaction": [
+            ["UI/UX Design", "User-centered design principles"],
+            ["Usability Testing", "Evaluating interface effectiveness"],
+            ["Interaction Models", "Gesture, voice, and touch interfaces"]
+        ],
+        "Ethical Hacking": [
+            ["Penetration Testing", "Vulnerability assessment"],
+            ["Reverse Engineering", "Analyzing malware"],
+            ["Security Audits", "Compliance and risk assessment"]
+        ]
+    }
+}

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}{{ topic.name }}{% endblock %}
+
+{% block content %}
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="{% url 'mcq_app:home' %}#semesters">Semesters</a></li>
+      <li><a href="{% url 'mcq_app:semester_subjects' semester.id %}">Semester {{ semester.number }}</a></li>
+      <li><a href="{% url 'mcq_app:subject_topics' semester.id subject.id %}">{{ subject.name }}</a></li>
+      <li aria-current="page">{{ topic.name }}</li>
+    </ol>
+  </nav>
+
+  <div class="page-head">
+    <h1>{{ topic.name }}</h1>
+    <p>{{ topic.description }}</p>
+  </div>
+
+  <section class="panel">
+    <ul class="facts">
+      <li><strong>{{ question_count }}</strong> questions</li>
+      <li><strong>{{ minutes }} minutes</strong> on the clock</li>
+      <li>GATE, university and interview difficulty</li>
+    </ul>
+    <form method="post" data-pending-text="Preparing your questions. This can take a few seconds.">
+      {% csrf_token %}
+      <button type="submit" class="btn">Start quiz</button>
+    </form>
+    <p class="muted small note">Questions are written by AI each time you start, so every quiz is different. Check anything important against your textbook.</p>
+  </section>
+
+  {% if attempts %}
+  <section class="section">
+    <h2>Your recent attempts</h2>
+    <div class="table-wrap">
+      <table class="table">
+        <thead><tr><th>Date</th><th class="num">Score</th><th>Result</th></tr></thead>
+        <tbody>
+          {% for attempt in attempts %}
+          <tr>
+            <td><a href="{% url 'mcq_app:quiz_results' attempt.id %}">{{ attempt.completed_at|date:"j M Y, H:i" }}</a></td>
+            <td class="num">{{ attempt.score }}/{{ attempt.total_questions }}</td>
+            <td class="meter-cell"><meter min="0" max="100" value="{{ attempt.percentage }}">{{ attempt.percentage }}%</meter> <span class="small muted">{{ attempt.percentage }}%</span></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+  {% endif %}
+</div>
+{% endblock %}

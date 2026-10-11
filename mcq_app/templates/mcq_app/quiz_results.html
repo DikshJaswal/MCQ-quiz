@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}Results: {{ topic.name }}{% endblock %}
+
+{% block content %}
+<div class="container">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="{% url 'mcq_app:home' %}#semesters">Semesters</a></li>
+      <li><a href="{% url 'mcq_app:semester_subjects' semester.id %}">Semester {{ semester.number }}</a></li>
+      <li><a href="{% url 'mcq_app:subject_topics' semester.id subject.id %}">{{ subject.name }}</a></li>
+      <li aria-current="page">{{ topic.name }} results</li>
+    </ol>
+  </nav>
+
+  <section class="panel score-card">
+    <div class="score">{{ attempt.score }}<small>of {{ attempt.total_questions }}</small></div>
+    <div>
+      <p class="nomargin"><strong>{{ attempt.percentage }}%</strong> on {{ topic.name }}. {{ attempt.feedback }}</p>
+      {% if items %}
+      <ul class="tally">
+        <li><strong>{{ attempt.score }}</strong> correct</li>
+        <li><strong>{{ wrong }}</strong> incorrect</li>
+        <li><strong>{{ skipped }}</strong> skipped</li>
+      </ul>
+      {% endif %}
+      <div class="btn-row note">
+        <a class="btn" href="{% url 'mcq_app:quiz_intro' topic.id %}">Take another quiz</a>
+        <a class="btn btn-quiet" href="{% url 'mcq_app:subject_topics' semester.id subject.id %}">Choose another topic</a>
+      </div>
+    </div>
+  </section>
+
+  {% if items %}
+  <section class="section">
+    <h2>Review your answers</h2>
+    <ol class="review">
+      {% for item in items %}
+      <li>
+        <details{% if item.status != "correct" %} open{% endif %}>
+          <summary>
+            <span class="status status-{{ item.status }}">{% if item.status == "wrong" %}Incorrect{% else %}{{ item.status|capfirst }}{% endif %}</span>
+            <span class="review-q">{{ item.number }}. {{ item.question }}</span>
+          </summary>
+          <div class="review-body">
+            <div class="options">
+              {% for option in item.options %}
+              <div class="option{% if option.is_correct %} is-right{% elif option.is_selected %} is-wrong{% endif %}">
+                <span class="bubble" aria-hidden="true">{{ option.letter }}</span>
+                <span class="option-text">{{ option.text }}</span>
+                {% if option.is_selected %}<span class="tag">Your answer</span>{% elif option.is_correct %}<span class="tag">Correct answer</span>{% endif %}
+              </div>
+              {% endfor %}
+            </div>
+            {% if item.explanation %}
+            <p class="explanation"><strong>Explanation</strong>{{ item.explanation }}</p>
+            {% endif %}
+          </div>
+        </details>
+      </li>
+      {% endfor %}
+    </ol>
+  </section>
+  {% else %}
+  <p class="notice notice-info section">The question-by-question review is only available right after you finish a quiz.</p>
+  {% endif %}
+
+  {% if history|length > 1 %}
+  <section class="section">
+    <h2>Your attempts on this topic</h2>
+    <div class="table-wrap">
+      <table class="table">
+        <thead><tr><th>Date</th><th class="num">Score</th><th>Result</th></tr></thead>
+        <tbody>
+          {% for past in history %}
+          <tr>
+            <td>{% if past.id == attempt.id %}<strong>This attempt</strong>{% else %}<a href="{% url 'mcq_app:quiz_results' past.id %}">{{ past.completed_at|date:"j M Y, H:i" }}</a>{% endif %}</td>
+            <td class="num">{{ past.score }}/{{ past.total_questions }}</td>
+            <td class="meter-cell"><meter min="0" max="100" value="{{ past.percentage }}">{{ past.percentage }}%</meter> <span class="small muted">{{ past.percentage }}%</span></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+  {% endif %}
+</div>
+{% endblock %}

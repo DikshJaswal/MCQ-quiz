@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load quiz_extras %}
+{% block title %}CSE MCQ Test Portal{% endblock %}
+{% block main_class %}{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+  <h1>Master CSE Subjects with MCQs</h1>
+  <p>Practice for GATE, Placements &amp; Semester Exams</p>
+</section>
+
+<!-- Semesters Grid -->
+<section class="semesters" id="semesters">
+  <h2>Choose Your Semester</h2>
+  <div class="semester-grid">
+    {% for group in year_groups %}
+      {% for semester in group.semesters %}
+      <a class="semester-card" href="{% url 'mcq_app:semester_subjects' semester.id %}">
+        <h3>{{ group.year|ordinal }} Year - Semester {{ semester.number }}</h3>
+        <p>{% for subject in semester.subject_set.all %}{{ subject.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+      </a>
+      {% endfor %}
+    {% empty %}
+      <p class="empty">No semesters have been loaded yet.
+        {% if user.is_staff %}Run <code>python manage.py import_data</code> on the server to add them.{% endif %}
+      </p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

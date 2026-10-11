@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Your profile{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="page-head">
+    <h1>{{ user.get_full_name|default:user.username }}</h1>
+    <p>Member since {{ user.date_joined|date:"F Y" }}</p>
+  </div>
+
+  <dl class="stats">
+    <div><dt>Quizzes taken</dt><dd>{{ attempt_count }}</dd></div>
+    <div><dt>Topics practised</dt><dd>{{ topic_count }}</dd></div>
+    <div><dt>Overall accuracy</dt><dd>{% if accuracy is not None %}{{ accuracy }}%{% else %}None yet{% endif %}</dd></div>
+  </dl>
+
+  <section>
+    <h2>Account</h2>
+    <dl class="details">
+      <dt>Username</dt><dd>{{ user.username }}</dd>
+      <dt>Email</dt><dd>{{ user.email }}</dd>
+      {% if user.get_full_name %}<dt>Name</dt><dd>{{ user.get_full_name }}</dd>{% endif %}
+    </dl>
+    <div class="btn-row">
+      <a class="btn btn-quiet" href="{% url 'edit_profile' %}">Edit profile</a>
+      <a class="btn btn-quiet" href="{% url 'password_change' %}">Change password</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Recent quizzes</h2>
+    {% if recent_attempts %}
+    <div class="table-wrap">
+      <table class="table">
+        <thead><tr><th>Topic</th><th>Date</th><th class="num">Score</th></tr></thead>
+        <tbody>
+          {% for attempt in recent_attempts %}
+          <tr>
+            <td><a href="{% url 'mcq_app:quiz_results' attempt.id %}">{{ attempt.topic.name }}</a>
+                <span class="muted small">{{ attempt.topic.subject.name }}</span></td>
+            <td>{{ attempt.completed_at|date:"j M Y" }}</td>
+            <td class="num">{{ attempt.score }}/{{ attempt.total_questions }} ({{ attempt.percentage }}%)</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+      <p class="empty">You haven't taken a quiz yet. <a href="{% url 'mcq_app:home' %}#semesters">Pick a topic to start.</a></p>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

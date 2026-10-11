@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+
+      - name: Django checks
+        env:
+          DJANGO_DEBUG: "True"
+        run: |
+          python manage.py check
+          python manage.py makemigrations --check --dry-run
+
+      - name: Production-mode checks
+        env:
+          DJANGO_SECRET_KEY: ci-only-secret-key-0123456789abcdef0123456789abcdef
+          DJANGO_ALLOWED_HOSTS: example.com
+        run: |
+          python manage.py check --deploy --fail-level ERROR
+          python manage.py collectstatic --noinput
+
+      - name: Tests
+        env:
+          DJANGO_DEBUG: "True"
+        run: python manage.py test

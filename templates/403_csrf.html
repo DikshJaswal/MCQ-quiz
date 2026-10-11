@@ -1,0 +1,23 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Please try again | CSE MCQ Portal</title>
+  <link rel="stylesheet" href="{% static 'css/site.css' %}">
+</head>
+<body>
+  <nav class="navbar" aria-label="Main">
+    <a class="logo" href="/">CSE MCQ Portal</a>
+    <div class="nav-links"><a href="/">Home</a></div>
+  </nav>
+  <main class="page">
+    <div class="narrow">
+      <h1>Your form session expired</h1>
+      <p>For your security, the form couldn't be verified. Go back, reload the page, and submit it again. If this keeps happening, make sure cookies are enabled.</p>
+      <p><a class="btn" href="/">Go to the home page</a></p>
+    </div>
+  </main>
+  <footer><p>&copy; {% now "Y" %} CSE MCQ Portal. All Rights Reserved.</p></footer>
+</body>
+</html>

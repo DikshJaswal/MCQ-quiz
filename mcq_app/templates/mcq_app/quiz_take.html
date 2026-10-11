@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Quiz: {{ topic.name }}{% endblock %}
+
+{% block content %}
+<div class="narrow">
+  <form id="quiz-form" method="post" data-time-limit="{{ time_limit }}">
+    {% csrf_token %}
+
+    <div class="quiz-head">
+      <div>
+        <h1>{{ topic.name }}</h1>
+        <p class="muted small nomargin">{{ subject.name }}, Semester {{ semester.number }}</p>
+      </div>
+      <div id="timer" class="timer" role="timer" data-js-only hidden>
+        <span class="visually-hidden">Time left: </span><span id="timer-text">--:--</span>
+      </div>
+    </div>
+
+    <div class="progress-row" data-js-only hidden>
+      <progress id="quiz-progress" max="{{ total }}" value="0">0 answered</progress>
+      <span id="quiz-counter" aria-live="polite"></span>
+    </div>
+
+    <ol id="palette" class="palette" aria-label="Jump to question" data-js-only hidden></ol>
+
+    {% for q in questions %}
+    <fieldset class="question" id="question-{{ q.number }}">
+      <legend>
+        <span class="q-label">Question {{ q.number }} of {{ total }}<span class="badge">{{ q.difficulty }}</span></span>
+        <span class="q-text">{{ q.question }}</span>
+      </legend>
+      <div class="options">
+        {% for option in q.options %}
+        <label class="option">
+          <input type="radio" name="q{{ q.index }}" value="{{ option.value }}">
+          <span class="bubble" aria-hidden="true">{{ option.letter }}</span>
+          <span class="option-text">{{ option.text }}</span>
+        </label>
+        {% endfor %}
+      </div>
+    </fieldset>
+    {% endfor %}
+
+    <div class="quiz-nav">
+      <button type="button" id="prev-btn" class="btn btn-quiet" data-js-only hidden>Previous</button>
+      <button type="button" id="next-btn" class="btn" data-js-only hidden>Next</button>
+      <span class="spacer"></span>
+      <button type="submit" id="submit-btn" class="btn">Submit answers</button>
+    </div>
+  </form>
+</div>
+{% endblock %}
