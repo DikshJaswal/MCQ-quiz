@@ -37,7 +37,7 @@ You need Python 3.10 or newer and a free Gemini API key from <https://aistudio.g
 **1. Get the code**
 
 ```bash
-git clone https://github.com/DikshJaswal/Our-Project-1.git mcq_quiz
+git clone https://github.com/DikshJaswal/MCQ-quiz.git mcq_quiz
 cd mcq_quiz
 ```
 
